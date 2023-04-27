@@ -2,6 +2,8 @@ import { AppBar, Box, Button, Container, IconButton, Menu, MenuItem, Toolbar, Ty
 import MenuIcon from '@mui/icons-material/Menu'
 import { useState } from 'react';
 import Link from 'next/link';
+import { Provider } from 'react-redux';
+import store from '../store';
 
 const pages = ['Tasks', 'Add'];
 
@@ -110,7 +112,9 @@ export default function App({ Component, pageProps }) {
           </Toolbar>
         </Container>
       </AppBar>
-      <Component {...pageProps} />
+      <Provider store={store}>
+        <Component {...pageProps} />
+      </Provider>
     </>
   )
 }

@@ -6,8 +6,36 @@ import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
+import { connect } from "react-redux";
+import { retrieveTasks, findTasksByTitle, deleteAllTasks } from "../actions/tasks";
+import { useState } from 'react'
 
-export default function Home() {
+
+function Home({ data }) {
+  const [searchTitle, setSearchTitle] = useState("")
+  const [ tasks, setTasks ] = useState([])
+
+  const onChangeSearchTitle = (e) => {
+    const searchTitle = e.target.value;
+
+    setSearchTitle(searchTitle)
+  }
+
+  const removeAllTasks = () => {
+    this.props
+      .deleteAllTasks()
+      .then((response) => {
+        console.log(response)
+      })
+      .catch((e) => {
+        console.log(e)
+      });
+  }
+
+  const findByTitle = () => {
+    findTasksByTitle(searchTitle)
+  }
+
   return (
     <>
       <Head>
@@ -53,3 +81,19 @@ export default function Home() {
     </>
   )
 }
+
+// export async function getServerSideProps() {
+//   // Fetch data from external API
+//   const res = await retrieveTasks()
+//   const data = await res
+//   // Pass data to the page via props
+//   return { props: { data } }
+// }
+
+const mapStateToProps = (state) => {
+  return {
+    tasks: state.tasks,
+  };
+};
+
+export default connect(mapStateToProps, { retrieveTasks, findTasksByTitle, deleteAllTasks })(Home);

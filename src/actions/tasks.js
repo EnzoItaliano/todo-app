@@ -26,7 +26,7 @@ export const createTask = (title, description) => async (dispatch) => {
 export const retrieveTasks = () => async (dispatch) => {
     try {
         const res = await TaskService.getAll();
-
+        
         dispatch({
         type: RETRIEVE_TASKS,
         payload: res.data,

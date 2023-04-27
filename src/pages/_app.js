@@ -105,7 +105,9 @@ export default function App({ Component, pageProps }) {
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >
-                  {page}
+                  <Link href={`/${page}`}>
+                    {page}
+                  </Link>
                 </Button>
               ))}
             </Box>
